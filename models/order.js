@@ -1,6 +1,7 @@
 const mongoose = require('../db/index');
 const productInfoSchema = require('./subdocuments/productInfo');
 const customerInfoSchema = require('./subdocuments/customerInfo');
+const createordernum = require('../method/tools');
 
 const schema = mongoose.Schema(
   {
@@ -20,6 +21,12 @@ const schema = mongoose.Schema(
       // 订单编号
       type: String,
       require: true,
+      default: createordernum(),
+    },
+    state: {
+      //订单状态
+      type: String,
+      default: '未支付',
     },
   },
   {

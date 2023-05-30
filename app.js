@@ -10,6 +10,10 @@ const bouncer = require('koa-bouncer');
 const jwt = require('koa-jwt');
 
 const index = require('./routes/index');
+const catchError = require('./middlewares/exception');
+const errors = require('./method/httpException');
+
+global.errors = errors;
 
 // error handler
 onerror(app);
@@ -28,32 +32,8 @@ app.use(
 // 表单校验中间件
 app.use(bouncer.middleware());
 
-app.use(async (ctx, next) => {
-  console.log('asdfgakfhkj');
-  ctx.cc = function (err, status = 1) {
-    ctx.body = {
-      // status为一表示失败
-      status,
-      // 状态描述
-      message: err instanceof Error ? err.message : err,
-    };
-  };
-  await next();
-});
-
-// 异常处理中间件;
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (error) {
-    if (error instanceof bouncer.ValidationError) {
-      console.log();
-      ctx.cc(error.bouncer);
-      return;
-    }
-    console.log(error);
-  }
-});
+// 错误处理中间件
+app.use(catchError);
 
 app.use(json());
 app.use(logger());

@@ -13,6 +13,6 @@ module.exports = {
   jwt: {
     // 加密解密Token的秘钥
     jwtSecretKey: 'one piece yyds ^_^ !!!',
-    expiresIn: '10h',
+    expiresIn: '1000h',
   },
 };

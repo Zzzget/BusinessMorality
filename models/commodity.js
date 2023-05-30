@@ -14,7 +14,7 @@ const schema = mongoose.Schema(
     },
     picture: {
       // 商品图片
-      type: String,
+      type: Array,
       require: true,
     },
     is_valid: {
@@ -45,6 +45,11 @@ const schema = mongoose.Schema(
       type: Number,
       require: true,
       default: 0,
+    },
+    classification: {
+      // 商品销量
+      type: String,
+      require: true,
     },
   },
   {

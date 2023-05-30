@@ -3,7 +3,11 @@ const bcrypt = require('bcrypt');
 
 let schema_1 = mongoose.Schema(
   {
-    name: { type: String, require: true },
+    name: {
+      type: String,
+      require: true,
+      default: '',
+    },
     account: {
       type: String,
       require: true,
@@ -18,7 +22,11 @@ let schema_1 = mongoose.Schema(
         return psw;
       },
     },
-    user_pic: { type: String, require: true },
+    user_pic: {
+      type: String,
+      require: true,
+      default: '',
+    },
   },
   {
     timestamps: {

@@ -12,7 +12,7 @@ class CateController {
     // 3.判断是否已存在
     const data = await userCategory.findOne({ name });
     if (data) {
-      ctx.cc('已存在同名分类');
+      throw new global.errors.Existing('已存在同名分类');
     } else {
       // 3.处理结果
       userCategory.create({ name });
